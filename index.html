@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CREATOR ARCHIVE // Retro-Arcade Portfolio Hub</title>
+
+  <!-- Google Fonts: Arcade/Retro Display + Clean UI Body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Inter:wght@400;600;700;800&family=Press+Start+2P&family=Rubik+Mono+One&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome for Social & UI Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & RETRO PALETTE (SONIC MANIA + SONIC XG + SHOWCASE)
+       ========================================================================== */
+    :root {
+      --mania-blue: #0055FF;
+      --mania-yellow: #FFD700;
+      --mania-red: #FF2A2A;
+      --mania-green: #00C853;
+      --xg-black: #090A0F;
+      --xg-panel: #12151E;
+      --xg-nav: #232733;
+      --xg-border: #383E52;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--xg-black);
+      color: #F4F6FB;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background-color: var(--xg-black);
+    }
+
+    /* ==========================================================================
+       2. SONIC XG VERTICAL ZIG-ZAG SIDE BORDERS
+       ========================================================================== */
+    .xg-zigzag-left {
+      background-color: var(--mania-red);
+      background-image:
+        linear-gradient(135deg, #090A0F 25%, transparent 25%),
+        linear-gradient(225deg, #090A0F 25%, transparent 25%),
+        linear-gradient(45deg, #090A0F 25%, transparent 25%),
+        linear-gradient(315deg, #090A0F 25%, #7A0000 25%);
+      background-position: 16px 0, 16px 0, 0 0, 0 0;
+      background-size: 32px 32px;
+      background-repeat: repeat-y;
+    }
+
+    .xg-zigzag-right {
+      background-color: var(--mania-red);
+      background-image:
+        linear-gradient(135deg, #090A0F 25%, transparent 25%),
+        linear-gradient(225deg, #090A0F 25%, transparent 25%),
+        linear-gradient(45deg, #090A0F 25%, transparent 25%),
+        linear-gradient(315deg, #090A0F 25%, #7A0000 25%);
+      background-position: 0 0, 0 0, 16px 0, 16px 0;
+      background-size: 32px 32px;
+      background-repeat: repeat-y;
+    }
+
+    /* ==========================================================================
+       3. ARCADE TYPOGRAPHY & OUTLINED HEADERS (SONIC XG STYLE)
+       ========================================================================== */
+    .font-arcade {
+      font-family: 'Rubik Mono One', sans-serif;
+      letter-spacing: 0.04em;
+    }
+
+    .font-pixel {
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    .font-tech {
+      font-family: 'Chakra Petch', sans-serif;
+    }
+
+    /* Outlined Dark Arcade Nav Link (Inspired by STORY / MANUAL / DOWNLOADS) */
+    .xg-nav-link {
+      font-family: 'Rubik Mono One', sans-serif;
+      color: #161922;
+      -webkit-text-stroke: 1.5px #6E768F;
+      text-shadow: 2px 2px 0px #000000;
+      transition: all 0.15s ease;
+    }
+
+    .xg-nav-link:hover,
+    .xg-nav-link.active {
+      color: var(--mania-yellow);
+      -webkit-text-stroke: 1.5px #000000;
+      text-shadow: 3px 3px 0px var(--mania-blue);
+      transform: translateY(-2px);
+    }
+
+    /* Main Section Header (Inspired by "WELCOME TO SONIC XG") */
+    .xg-section-title {
+      font-family: 'Rubik Mono One', sans-serif;
+      color: #FFFFFF;
+      -webkit-text-stroke: 2px #000000;
+      text-shadow:
+        0 4px 0 #000000,
+        4px 4px 0 var(--mania-blue);
+    }
+
+    /* Sonic Mania Logo Emblem Treatment */
+    .mania-logo-text {
+      font-family: 'Rubik Mono One', sans-serif;
+      background: linear-gradient(180deg, #FFF700 0%, #FFB800 55%, #FF6B00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0px 3px 0px #001B66) drop-shadow(3px 0px 0px #0055FF) drop-shadow(-2px -2px 0px #0055FF);
+    }
+
+    /* ==========================================================================
+       4. SONIC MANIA MEMPHIS GEOMETRIC BANNER & FLOATING SHAPES
+       ========================================================================== */
+    .mania-hero-bg {
+      background-color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Sawtooth bottom edge like Sonic Mania banner */
+    .mania-sawtooth-bar {
+      height: 22px;
+      width: 100%;
+      background-color: var(--mania-blue);
+      background-image:
+        linear-gradient(135deg, transparent 50%, var(--mania-blue) 50%),
+        linear-gradient(225deg, transparent 50%, var(--mania-blue) 50%);
+      background-position: 0 0, 16px 0;
+      background-size: 32px 22px;
+      background-repeat: repeat-x;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(6deg); }
+    }
+
+    @keyframes pulseStar {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.12) rotate(12deg); }
+    }
+
+    .animate-float {
+      animation: floatSlow 4.5s ease-in-out infinite;
+    }
+
+    .animate-star {
+      animation: pulseStar 3.8s ease-in-out infinite;
+    }
+
+    /* ==========================================================================
+       5. ARCADE BUTTONS & SHOWCASE GRID CARDS
+       ========================================================================== */
+    .arcade-btn {
+      border: 3px solid #000000;
+      box-shadow: 4px 4px 0px #000000;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+    }
+
+    .arcade-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #000000;
+    }
+
+    .arcade-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000000;
+    }
+
+    .gallery-card {
+      position: relative;
+      overflow: hidden;
+      background: #0D1017;
+      border: 3px solid #1E2433;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      border-color: var(--mania-yellow);
+      box-shadow: 0 10px 25px rgba(0, 85, 255, 0.35);
+      z-index: 10;
+    }
+
+    .gallery-card-overlay {
+      background: linear-gradient(to top, rgba(9, 10, 15, 0.96) 0%, rgba(9, 10, 15, 0.65) 55%, rgba(9, 10, 15, 0) 100%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .gallery-card:hover .gallery-card-overlay,
+    .gallery-card:focus-within .gallery-card-overlay {
+      opacity: 1;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090A0F;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #0055FF;
+      border: 2px solid #090A0F;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FFD700;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-yellow-400 selection:text-black">
+
+  <!-- ==========================================================================
+       EASY-TO-EDIT CREATOR CONFIGURATION SCRIPT
+       Edit your handle, tagline, bio, socials, and project titles right here!
+       ========================================================================== -->
+  <script>
+    const CREATOR_CONFIG = {
+      brandTitle: "CREATOR ARCHIVE",
+      bannerHeadline: "The Official Creator Portfolio",
+      studioSubtitle: "3D RENDERS • GRAPHIC DESIGN • VIDEO",
+      tagline: "3D Character Renders, Cel-Shaded Worlds & High-Voltage Visual Design.",
+      commissionStatus: "COMMISSIONS & COLLABS OPEN",
+      location: "North Carolina, USA",
+      bioParagraphs: [
+        "Welcome to the official <strong class='text-yellow-400'>CREATOR ARCHIVE</strong> — a multidisciplinary showcase of 3D art, graphic design, and video editing featuring stylized renders, retro-arcade visuals, and bold visual storytelling.",
+        "From low-poly and cel-shaded character scenes (<span class='text-blue-400 font-semibold'>Pakku</span>, <span class='text-red-400 font-semibold'>Noir Flowers</span>, <span class='text-amber-400 font-semibold'>REVANT TRUE</span>) to sharp promotional graphics and film/photography edits, every project is built with classic arcade energy and modern punch.",
+        "Click any piece in the showcase grid below to inspect the full artwork, view production notes, or hit <strong class='text-emerald-400'>Get In Touch</strong> to start a project together."
+      ],
+      socials: {
+        youtube: "https://youtube.com",
+        roblox: "https://www.roblox.com",
+        discordTag: "creator.archive",
+        email: "contact@creatorarchive.example"
+      }
+    };
+  </script>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-yellow-400 selection:text-black">
+
+  <!-- ==========================================================================
+       HEADER & HERO SECTION (SONIC MANIA + XG INPIRED)
+       ========================================================================== -->
+  <header class="w-full select-none">
+                <span id="commission-badge">COMMISSIONS & COLLABS OPEN</span>
+              </span>
+            </div>
+            <p id="header-tagline" class="text-xs sm:text-sm text-gray-300 italic mt-0.5">
+              3D Character Renders, Cel-Shaded Worlds & High-Voltage Visual Design.
+            </p>
+          </div>
+        </div>
+
+        <!-- Get In Touch CTA Button -->
+        <div class="flex items-center gap-2.5">
+          <button
+            onclick="openContactModal()"
+            class="arcade-btn bg-[#00C853] hover:bg-[#00E676] text-black font-tech font-bold uppercase tracking-wider text-sm sm:text-base px-4 py-2 rounded-lg cursor-pointer flex items-center gap-2"
+          >
+            <i class="fa-solid fa-bolt"></i>
+            <span>Get In Touch</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sonic Mania Inspired Geometric Hero Banner -->
+    <div class="mania-hero-bg text-black pt-7 pb-0">
+      <!-- Diagonal Geometric Color Blocks (Green, Yellow, Red) -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <!-- Left Green Wedge -->
+        <div class="absolute -bottom-8 -left-10 w-[55%] h-36 bg-[#00C853] transform rotate-12 origin-bottom-left"></div>
+        <!-- Center Yellow Wedge -->
+        <div class="absolute bottom-0 left-[25%] w-[55%] h-24 bg-[#FFD700] transform -rotate-3"></div>
+        <!-- Right Red Wedge -->
+        <div class="absolute -bottom-10 -right-10 w-[45%] h-52 bg-[#FF2A2A] transform -rotate-25 origin-bottom-right"></div>
+
+        <!-- Floating Memphis Shapes (Triangles, Squares, Star, Ring) -->
+        <svg class="w-full h-full" viewBox="0 0 1200 260" preserveAspectRatio="xMidYMid slice">
+          <!-- Dotted Arc -->
+          <path d="M 130 55 Q 260 10 390 55" fill="none" stroke="#111111" stroke-width="5" stroke-dasharray="6 8" />
+          <!-- Floating Black Triangles -->
+          <polygon points="460,22 478,48 442,48" fill="#111111" class="animate-float" />
+          <polygon points="880,18 900,42 866,44" fill="#111111" />
+          <polygon points="415,195 435,215 405,220" fill="#111111" />
+          <polygon points="940,175 962,195 930,202" fill="#111111" />
+          <!-- Sonic Ring Circle on Left -->
+          <circle cx="145" cy="180" r="24" fill="#FF2A2A" />
+          <circle cx="141" cy="180" r="22" fill="#111111" />
+          <circle cx="141" cy="180" r="13" fill="#FFFFFF" />
+          <!-- 4-Point / 5-Point Star Top Right -->
+          <g transform="translate(1030, 48)" class="animate-star">
+            <polygon points="0,-24 7,-8 24,-8 10,3 15,20 0,10 -15,20 -10,3 -24,-8 -7,-8" fill="#FFD700" transform="translate(4,4)" />
+            <polygon points="0,-24 7,-8 24,-8 10,3 15,20 0,10 -15,20 -10,3 -24,-8 -7,-8" fill="#FFFFFF" stroke="#111111" stroke-width="3.5" />
+          </g>
+          <!-- Green Dots Top Right -->
+          <circle cx="1115" cy="48" r="8" fill="#00C853" />
+          <circle cx="1148" cy="48" r="8" fill="#00C853" />
+          <!-- Connected White Squares Bottom Right -->
+          <g transform="translate(945, 148) rotate(8)">
+            <rect x="0" y="6" width="125" height="14" fill="#0055FF" />
+            <rect x="8" y="0" width="22" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="3" />
+            <rect x="38" y="0" width="22" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="3" />
+            <rect x="68" y="0" width="22" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="3" />
+            <rect x="98" y="0" width="22" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="3" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Hero Content Container -->
+      <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pb-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <!-- Left Emblem Badge (Sonic Mania Logo Box Style) -->
+        <div class="text-center md:text-left">
+          <div class="inline-block bg-[#0055FF] border-4 border-black rounded-2xl px-5 py-3 shadow-[6px_6px_0px_#000000] transform -rotate-1">
+            <span class="block font-pixel text-[10px] sm:text-xs text-white tracking-widest uppercase mb-1">
+              ★ PLAYER 1 SELECT ★
+            </span>
+            <h1 id="hero-main-handle" class="mania-logo-text text-3xl sm:text-5xl uppercase leading-none tracking-tight">
+              PORTFOLIO HUB
+            </h1>
+            <div class="mt-2 bg-[#FF2A2A] border-2 border-black rounded-lg px-3 py-1 inline-block transform rotate-1">
+              <span id="hero-sub-badge" class="font-arcade text-xs sm:text-sm text-[#FFD700] tracking-wider drop-shadow-[2px_2px_0px_#000]">
+                3D RENDERS • GRAPHIC DESIGN • VIDEO
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Quick Stats / Zone Card -->
+        <div class="bg-[#090A0F]/95 text-white border-4 border-black rounded-2xl p-4 sm:p-5 shadow-[6px_6px_0px_#000000] max-w-md w-full">
+          <div class="flex items-center justify-between border-b-2 border-gray-800 pb-2 mb-3">
+            <span class="font-pixel text-[10px] text-[#FFD700]">ZONE: PORTFOLIO ACT 1</span>
+            <span class="font-tech font-bold text-xs bg-[#0055FF] text-white px-2 py-0.5 rounded">10 WORKS</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-[#141824] border border-gray-700 rounded-xl p-2">
+              <div class="font-arcade text-lg text-[#FFD700]">3D</div>
+              <div class="text-[11px] text-gray-300 font-semibold">Renders</div>
+            </div>
+            <div class="bg-[#141824] border border-gray-700 rounded-xl p-2">
+              <div class="font-arcade text-lg text-[#FF2A2A]">GFX</div>
+              <div class="text-[11px] text-gray-300 font-semibold">Design</div>
+            </div>
+            <div class="bg-[#141824] border border-gray-700 rounded-xl p-2">
+              <div class="font-arcade text-lg text-[#00C853]">VID</div>
+              <div class="text-[11px] text-gray-300 font-semibold">Editing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sonic Mania Blue Sawtooth Bottom Transition -->
+      <div class="mania-sawtooth-bar relative z-10"></div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       SONIC XG DARK NAVIGATION BAR & SOCIAL LINKS
+       ========================================================================== -->
+  <nav class="sticky top-0 z-40 bg-[#232733] border-b-4 border-black shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-4">
+      <!-- Left Arcade Navigation Links -->
+      <div class="flex items-center gap-4 sm:gap-7 overflow-x-auto py-1">
+        <a href="#showcase" class="xg-nav-link active text-base sm:text-xl uppercase whitespace-nowrap">SHOWCASE</a>
+        <a href="#about" class="xg-nav-link text-base sm:text-xl uppercase whitespace-nowrap">ABOUT</a>
+        <a href="#capabilities" class="xg-nav-link text-base sm:text-xl uppercase whitespace-nowrap">SKILLS</a>
+        <button onclick="openContactModal()" class="xg-nav-link text-base sm:text-xl uppercase whitespace-nowrap cursor-pointer bg-transparent border-0 p-0">
+          CONTACT
+        </button>
+      </div>
+
+      <!-- Right Social Icon Strip (Inspired by J.C. Thornton's social bar) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a id="social-youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" title="YouTube"
+           class="w-9 h-9 rounded-lg bg-[#12151E] hover:bg-[#FF2A2A] text-white border border-gray-600 flex items-center justify-center transition-colors">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a id="social-roblox" href="https://www.roblox.com" target="_blank" rel="noopener noreferrer" title="Roblox"
+           class="w-9 h-9 rounded-lg bg-[#12151E] hover:bg-[#0055FF] text-white border border-gray-600 flex items-center justify-center transition-colors font-arcade text-xs">
+          RBLX
+        </a>
+        <button onclick="copyDiscord()" title="Copy Discord Tag"
+           class="w-9 h-9 rounded-lg bg-[#12151E] hover:bg-[#5865F2] text-white border border-gray-600 flex items-center justify-center transition-colors cursor-pointer">
+          <i class="fa-brands fa-discord"></i>
+        </button>
+        <button onclick="openContactModal()" title="Email / Inquiries"
+           class="w-9 h-9 rounded-lg bg-[#12151E] hover:bg-[#00C853] hover:text-black text-white border border-gray-600 flex items-center justify-center transition-colors cursor-pointer">
+          <i class="fa-solid fa-envelope"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       MAIN BODY WITH SONIC XG RED/BLACK ZIG-ZAG FLANKING BORDERS
+       ========================================================================== -->
+  <div class="flex-1 flex w-full">
+    <!-- Left Zig-Zag Border (Visible on Tablet & Desktop) -->
+    <aside class="hidden md:block w-8 lg:w-14 shrink-0 xg-zigzag-left border-r-2 border-red-900/60" aria-hidden="true"></aside>
+
+    <!-- Center Dark-Mode Main Content Stage -->
+    <main class="flex-1 min-w-0 bg-[#090A0F] relative">
+      <!-- Subtle Background Emblem Watermark (Sonic XG Center Crest Vibe) -->
+      <div class="pointer-events-none fixed inset-0 flex items-center justify-center opacity-[0.03] z-0">
+        <svg class="w-[520px] h-[520px]" viewBox="0 0 200 200" fill="none" stroke="#FFFFFF" stroke-width="4">
+          <circle cx="100" cy="100" r="88" />
+          <polygon points="100,20 122,78 184,78 134,114 152,172 100,136 48,172 66,114 16,78 78,78" />
+        </svg>
+      </div>
+
+      <!-- ====================================================================
+           SECTION 1: FULL-BLEED PORTFOLIO SHOWCASE GRID (J.C. THORNTON STYLE)
+           ==================================================================== -->
+      <section id="showcase" class="relative z-10 pt-8 pb-12 px-3 sm:px-6 max-w-[1440px] mx-auto">
+        <!-- Section Header & Arcade Filter Tabs -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-7 border-b-2 border-[#1F2433] pb-5">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-pixel text-[#FFD700] mb-2">
+              <span>▶ SELECT STAGE</span>
+            </div>
+            <h2 class="xg-section-title text-2xl sm:text-4xl uppercase">
+              PORTFOLIO ARCHIVE
+            </h2>
+          </div>
+
+          <!-- Category Filter Buttons -->
+          <div id="filter-bar" class="flex flex-wrap gap-2.5" role="tablist" aria-label="Portfolio Categories">
+            <button onclick="filterPortfolio('ALL')" data-filter="ALL"
+              class="filter-btn arcade-btn bg-[#FFD700] text-black font-tech font-bold uppercase text-xs sm:text-sm px-4 py-2 rounded-lg cursor-pointer">
+              All Works (10)
+            </button>
+            <button onclick="filterPortfolio('3D RENDERS')" data-filter="3D RENDERS"
+              class="filter-btn arcade-btn bg-[#161B26] text-white hover:bg-[#0055FF] font-tech font-bold uppercase text-xs sm:text-sm px-4 py-2 rounded-lg cursor-pointer">
+              3D Renders (6)
+            </button>
+            <button onclick="filterPortfolio('GRAPHIC DESIGN')" data-filter="GRAPHIC DESIGN"
+              class="filter-btn arcade-btn bg-[#161B26] text-white hover:bg-[#FF2A2A] font-tech font-bold uppercase text-xs sm:text-sm px-4 py-2 rounded-lg cursor-pointer">
+              Graphic Design (4)
+            </button>
+            <button onclick="filterPortfolio('FILM & VIDEO')" data-filter="FILM & VIDEO"
+              class="filter-btn arcade-btn bg-[#161B26] text-white hover:bg-[#00C853] hover:text-black font-tech font-bold uppercase text-xs sm:text-sm px-4 py-2 rounded-lg cursor-pointer">
+              Film & Video (3)
+            </button>
+          </div>
+        </div>
+
+        <!-- Edge-to-Edge Showcase Grid -->
+        <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+          <!-- Cards dynamically injected via JavaScript -->
+        </div>
+
+        <!-- GitHub Repo Asset Helper Note (Collapsible / Clean Banner) -->
+        <div class="mt-8 bg-[#12151E] border-2 border-[#2A3142] rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs sm:text-sm text-gray-300">
+          <div class="flex items-start sm:items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-[#0055FF]/20 border border-[#0055FF] text-[#60A5FA] flex items-center justify-center shrink-0">
+              <i class="fa-brands fa-github text-base"></i>
+            </span>
+            <div>
+              <strong class="text-white">GitHub Pages Ready:</strong> Upload your 10 image files into an
+              <code class="bg-black/60 text-yellow-300 px-1.5 py-0.5 rounded font-mono">assets/</code> folder next to
+              <code class="bg-black/60 text-yellow-300 px-1.5 py-0.5 rounded font-mono">index.html</code> — each card automatically loads your exact file and displays custom preview art until uploaded!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 2: ABOUT / CREATOR LORE (SONIC XG READABLE PANEL STYLE)
+           ==================================================================== -->
+      <section id="about" class="relative z-10 py-10 px-4 sm:px-8 max-w-6xl mx-auto">
+        <div class="bg-[#12151E] border-4 border-black rounded-2xl p-6 sm:p-8 shadow-[8px_8px_0px_#0055FF]">
+          <h2 class="xg-section-title text-2xl sm:text-3xl uppercase text-center mb-6">
+            WELCOME TO THE ARCHIVE
+          </h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <!-- Left Bio Text (Sonic XG Left-Aligned Crisp Typography) -->
+            <div id="bio-container" class="lg:col-span-7 space-y-4 text-gray-200 text-base sm:text-lg leading-relaxed">
+              <!-- Populated from CREATOR_CONFIG -->
+            </div>
+
+            <!-- Right Framed Featured Emblem Box (Sonic XG Right Framed Box) -->
+            <div class="lg:col-span-5">
+              <div class="bg-white p-2 rounded-xl border-4 border-black shadow-[6px_6px_0px_#FF2A2A]">
+                <div class="bg-[#090A0F] rounded-lg overflow-hidden relative aspect-video flex flex-col items-center justify-center p-4 text-center">
+                  <!-- Custom Crown & Studio Crest -->
+                  <svg class="w-20 h-20 text-[#FFD700] mb-2 drop-shadow-[0_4px_0_#7A0000]" viewBox="0 0 64 64" fill="currentColor">
+                    <path d="M8 46L4 18l15 11L32 12l13 17 15-11-4 28H8zm4 6h40v6H12v-6z"/>
+                  </svg>
+                  <div class="mania-logo-text text-2xl sm:text-3xl uppercase">CREATOR</div>
+                  <p class="font-pixel text-[9px] text-gray-300 mt-2 tracking-widest">EST. 2026 // ARCHIVE</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 3: CREATOR DISCIPLINES / SKILL LOADOUT
+           ==================================================================== -->
+      <section id="capabilities" class="relative z-10 py-8 pb-16 px-4 sm:px-8 max-w-6xl mx-auto">
+        <h2 class="xg-section-title text-xl sm:text-3xl uppercase text-center mb-8">
+          CREATOR LOADOUT
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Card 1: 3D Renders -->
+          <div class="bg-[#12151E] border-3 border-black rounded-2xl p-5 shadow-[5px_5px_0px_#0055FF]">
+            <div class="w-12 h-12 rounded-xl bg-[#0055FF] border-2 border-black flex items-center justify-center text-white text-xl mb-4">
+              <i class="fa-solid fa-cube"></i>
+            </div>
+            <h3 class="font-arcade text-lg text-[#FFD700] mb-2">3D RENDERS</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Stylized character modeling, cel-shaded environments, dramatic noir lighting, and retro arcade tribute scenes.
+            </p>
+          </div>
+
+          <!-- Card 2: Graphic Design -->
+          <div class="bg-[#12151E] border-3 border-black rounded-2xl p-5 shadow-[5px_5px_0px_#FF2A2A]">
+            <div class="w-12 h-12 rounded-xl bg-[#FF2A2A] border-2 border-black flex items-center justify-center text-white text-xl mb-4">
+              <i class="fa-solid fa-pen-nib"></i>
+            </div>
+            <h3 class="font-arcade text-lg text-[#FF2A2A] mb-2">GRAPHIC DESIGN</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Eye-catching thumbnails, custom typography, promotional posters, vanity plate concepts, and bold brand graphics.
+            </p>
+          </div>
+
+          <!-- Card 3: Film & Video -->
+          <div class="bg-[#12151E] border-3 border-black rounded-2xl p-5 shadow-[5px_5px_0px_#00C853]">
+            <div class="w-12 h-12 rounded-xl bg-[#00C853] border-2 border-black flex items-center justify-center text-black text-xl mb-4">
+              <i class="fa-solid fa-film"></i>
+            </div>
+            <h3 class="font-arcade text-lg text-[#00C853] mb-2">FILM & VIDEO</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              High-retention video editing, motion title sequences, storyboard pacing, and visual storytelling for creators.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Right Zig-Zag Border (Visible on Tablet & Desktop) -->
+    <aside class="hidden md:block w-8 lg:w-14 shrink-0 xg-zigzag-right border-l-2 border-red-900/60" aria-hidden="true"></aside>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="bg-[#0B0D14] border-t-4 border-black text-gray-400 py-6 px-4 text-center text-xs sm:text-sm">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>
+        © <span id="footer-year">2026</span> <strong class="text-white">CREATOR ARCHIVE STUDIO</strong>. Built for GitHub Pages.
+      </p>
+      <div class="flex items-center gap-4">
+        <a href="#showcase" class="hover:text-[#FFD700] transition-colors">Top ↑</a>
+        <button onclick="openContactModal()" class="text-[#00C853] hover:underline font-semibold cursor-pointer bg-transparent border-0">
+          Get In Touch
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       LIGHTBOX MODAL (FULL-SCREEN ARTWORK INSPECTOR)
+       ========================================================================== -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm p-3 sm:p-6" role="dialog" aria-modal="true">
+    <div class="bg-[#12151E] border-4 border-[#FFD700] rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden shadow-[0_0_40px_rgba(0,85,255,0.5)]">
+      <!-- Modal Top Bar -->
+      <div class="flex items-center justify-between px-4 py-3 bg-[#1A1F2E] border-b-2 border-black">
+        <div class="flex items-center gap-2 min-w-0">
+          <span id="modal-category-badge" class="px-2.5 py-0.5 rounded bg-[#0055FF] text-white font-tech font-bold text-xs uppercase shrink-0">
+            3D RENDERS
+          </span>
+          <h3 id="modal-title" class="font-tech font-bold text-white text-base sm:text-xl truncate">
+            Artwork Title
+          </h3>
+        </div>
+        <button onclick="closeLightbox()" class="w-9 h-9 rounded-lg bg-[#FF2A2A] hover:bg-red-500 text-white border-2 border-black flex items-center justify-center cursor-pointer shrink-0" aria-label="Close modal">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12">
+        <!-- Artwork Preview Stage -->
+        <div id="modal-image-stage" class="lg:col-span-8 bg-[#07080C] flex items-center justify-center p-3 sm:p-5 min-h-[260px] sm:min-h-[400px] border-b lg:border-b-0 lg:border-r border-gray-800">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Artwork Metadata & Description -->
+        <div class="lg:col-span-4 p-5 flex flex-col justify-between space-y-5">
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span id="header-brand-title" class="font-tech font-bold italic text-lg sm:text-xl tracking-wide bg-white text-black px-2 py-0.5 rounded-sm shadow">
+                The Official Creator Portfolio
+              </span>
+              <span class="hidden md:inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span id="commission-badge">COMMISSIONS & COLLABS OPEN</span>
+              </span>
+            </div>
+            <p id="header-tagline" class="text-xs sm:text-sm text-gray-300 italic mt-0.5">
+              3D Character Renders, Cel-Shaded Worlds & High-Voltage Visual Design.
+            </p>
+          </div>
+        </div>
+
+        <!-- Get In Touch CTA Button -->
+        <div class="flex items-center gap-2.5">
+          <button
+            onclick="openContactModal()"
+            class="arcade-btn bg-[#00C853] hover:bg-[#00E676] text-black font-tech font-bold uppercase tracking-wider text-sm sm:text-base px-4 py-2 rounded-lg cursor-pointer flex items-center gap-2"
+          >
+            <i class="fa-solid fa-bolt"></i>
+            <span>Get In Touch</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sonic Mania Inspired Geometric Hero Banner -->
+    <div class="mania-hero-bg text-black pt-7 pb-0">
+      <!-- Diagonal Geometric Color Blocks (Green, Yellow, Red) -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <!-- Left Green Wedge -->
+        <div class="absolute -bottom-8 -left-10 w-[55%] h-36 bg-[#00C853] transform rotate-12 origin-bottom-left"></div>
+        <!-- Center Yellow Wedge -->
+        <div class="absolute bottom-0 left-[25%] w-[55%] h-24 bg-[#FFD700] transform -rotate-3"></div>
+        <!-- Right Red Wedge -->
+        <div class="absolute -bottom-10 -right-10 w-[45%] h-52 bg-[#FF2A2A] transform -rotate-25 origin-bottom-right"></div>
+
+        <!-- Floating Memphis Shapes (Triangles, Squares, Star, Ring) -->
+        <svg class="w-full h-full" viewBox="0 0 1200 260" preserveAspectRatio="xMidYMid slice">
+          <!-- Dotted Arc -->
+          <path d="M 130 55 Q 260 10 390 55" fill="none" stroke="#111111" stroke-width="5" stroke-dasharray="6 8" />
+          <!-- Floating Black Triangles -->
+          <polygon points="460,22 478,48 442,48" fill="#111111" class="animate-float" />
+          <polygon points="880,18 900,42 866,44" fill="#111111" />
+          <polygon points="415,195 435,215 405,220" fill="#111111" />
+          <polygon points="940,175 962,195 930,202" fill="#111111" />
+          <!-- Sonic Ring Circle on Left -->
+          <circle cx="145" cy="180" r="24" fill="#FF2A2A" />
+          <circle cx="141" cy="180" r="22" fill="#111111" />
+          <circle cx="141" cy="180" r="13" fill="#FFFFFF" />
+          <!-- 4-Point / 5-Point Star Top Right -->
+          <g transform="translate(1030, 48)" class="animate-star">
+            <polygon points="0,-24 7,-8 24,-8 10,3 15,20 0,10 -15,20 -10,3 -24,-8 -7,-8" fill="#FFD700" transform="translate(4,4)" />
+            <polygon points="0,-24 7,-8 24,-8 10,3 15,20 0,10 -15,20 -10,3 -24,-8 -7,-8" fill="#FFFFFF" stroke="#111111" stroke-width="3.5" />
+          </g>
+          <!-- Green Dots Top Right -->
+          <circle cx="1115" cy="48" r="8" fill="#00C853" />
+          <circle cx="1148" cy="48" r="8" fill="#00C853" />
+          <!-- Connected White Squares Bottom Right -->
+          <g transform="translate(945, 148) rotate(8)">
+            <rect x="0" y="6" width="125" height="14" fill="#0055FF" />
+            <rect x="8" y="0" width="22" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="3" />
+            <rect x="38" y="0" width="22" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="3" />
+            <rect x="68" y="0" width="22" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="3" />
+            <rect x="98" y="0" width="22" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="3" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Hero Content Container -->
+      <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pb-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <!-- Left Emblem Badge (Sonic Mania Logo Box Style) -->
+        <div class="text-center md:text-left">
+          <div class="inline-block bg-[#0055FF] border-4 border-black rounded-2xl px-5 py-3 shadow-[6px_6px_0px_#000000] transform -rotate-1">
+            <span class="block font-pixel text-[10px] sm:text-xs text-white tracking-widest uppercase mb-1">
+              ★ PLAYER 1 SELECT ★
+            </span>
+            <h1 id="hero-main-handle" class="mania-logo-text text-3xl sm:text-5xl uppercase leading-none tracking-tight">
+              PORTFOLIO HUB
+            </h1>
+            <div class="mt-2 bg-[#FF2A2A] border-2 border-black rounded-lg px-3 py-1 inline-block transform rotate-1">
+              <span id="hero-sub-badge" class="font-arcade text-xs sm:text-sm text-[#FFD700] tracking-wider drop-shadow-[2px_2px_0px_#000]">
+                3D RENDERS • GRAPHIC DESIGN • VIDEO
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Quick Stats / Zone Card -->
+        <div class="bg-[#090A0F]/95 text-white border-4 border-black rounded-2xl p-4 sm:p-5 shadow-[6px_6px_0px_#000000] max-w-md w-full">
+          <div class="flex items-center justify-between border-b-2 border-gray-800 pb-2 mb-3">
+            <span class="font-pixel text-[10px] text-[#FFD700]">ZONE: PORTFOLIO ACT 1</span>
+            <span class="font-tech font-bold text-xs bg-[#0055FF] text-white px-2 py-0.5 rounded">10 WORKS</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-[#141824] border border-gray-700 rounded-xl p-2">
+              <div class="font-arcade text-lg text-[#FFD700]">3D</div>
+              <div class="text-[11px] text-gray-300 font-semibold">Renders</div>
+            </div>
+            <div class="bg-[#141824] border border-gray-700 rounded-xl p-2">
+              <div class="font-arcade text-lg text-[#FF2A2A]">GFX</div>
+              <div class="text-[11px] text-gray-300 font-semibold">Design</div>
+            </div>
+            <div class="bg-[#141824] border border-gray-700 rounded-xl p-2">
+              <div class="font-arcade text-lg text-[#00C853]">VID</div>
+              <div class="text-[11px] text-gray-300 font-semibold">Editing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sonic Mania Blue Sawtooth Bottom Transition -->
+      <div class="mania-sawtooth-bar relative z-10"></div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       SONIC XG DARK NAVIGATION BAR & SOCIAL LINKS
+       ========================================================================== -->
+  <nav class="sticky top-0 z-40 bg-[#232733] border-b-4 border-black shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-4">
+      <!-- Left Arcade Navigation Links -->
+      <div class="flex items-center gap-4 sm:gap-7 overflow-x-auto py-1">
+        <a href="#showcase" class="xg-nav-link active text-base sm:text-xl uppercase whitespace-nowrap">SHOWCASE</a>
+        <a href="#about" class="xg-nav-link text-base sm:text-xl uppercase whitespace-nowrap">ABOUT</a>
+        <a href="#capabilities" class="xg-nav-link text-base sm:text-xl uppercase whitespace-nowrap">SKILLS</a>
+        <button onclick="openContactModal()" class="xg-nav-link text-base sm:text-xl uppercase whitespace-nowrap cursor-pointer bg-transparent border-0 p-0">
+          CONTACT
+        </button>
+      </div>
+
+      <!-- Right Social Icon Strip -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a id="social-youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" title="YouTube"
+           class="w-9 h-9 rounded-lg bg-[#12151E] hover:bg-[#FF2A2A] text-white border border-gray-600 flex items-center justify-center transition-colors">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a id="social-roblox" href="https://www.roblox.com" target="_blank" rel="noopener noreferrer" title="Roblox"
+           class="w-9 h-9 rounded-lg bg-[#12151E] hover:bg-[#0055FF] text-white border border-gray-600 flex items-center justify-center transition-colors font-arcade text-xs">
+          RBLX
+        </a>
+        <button onclick="copyDiscord()" title="Copy Discord Tag"
+           class="w-9 h-9 rounded-lg bg-[#12151E] hover:bg-[#5865F2] text-white border border-gray-600 flex items-center justify-center transition-colors cursor-pointer">
+          <i class="fa-brands fa-discord"></i>
+        </button>
+        <button onclick="openContactModal()" title="Email / Inquiries"
+           class="w-9 h-9 rounded-lg bg-[#12151E] hover:bg-[#00C853] hover:text-black text-white border border-gray-600 flex items-center justify-center transition-colors cursor-pointer">
+          <i class="fa-solid fa-envelope"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       MAIN BODY WITH SONIC XG RED/BLACK ZIG-ZAG FLANKING BORDERS
+       ========================================================================== -->
+  <div class="flex-1 flex w-full">
+    <!-- Left Zig-Zag Border -->
+    <aside class="hidden md:block w-8 lg:w-14 shrink-0 xg-zigzag-left border-r-2 border-red-900/60" aria-hidden="true"></aside>
+
+    <!-- Center Dark-Mode Main Content Stage -->
+    <main class="flex-1 min-w-0 bg-[#090A0F] relative">
+      <!-- Subtle Background Emblem Watermark -->
+      <div class="pointer-events-none fixed inset-0 flex items-center justify-center opacity-[0.03] z-0">
+        <svg class="w-[520px] h-[520px]" viewBox="0 0 200 200" fill="none" stroke="#FFFFFF" stroke-width="4">
+          <circle cx="100" cy="100" r="88" />
+          <polygon points="100,20 122,78 184,78 134,114 152,172 100,136 48,172 66,114 16,78 78,78" />
+        </svg>
+      </div>
+
+      <!-- ====================================================================
+           SECTION 1: FULL-BLEED PORTFOLIO SHOWCASE GRID
+           ==================================================================== -->
+      <section id="showcase" class="relative z-10 pt-8 pb-12 px-3 sm:px-6 max-w-[1440px] mx-auto">
+        <!-- Section Header & Arcade Filter Tabs -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-7 border-b-2 border-[#1F2433] pb-5">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-pixel text-[#FFD700] mb-2">
+              <span>▶ SELECT STAGE</span>
+            </div>
+            <h2 class="xg-section-title text-2xl sm:text-4xl uppercase">
+              PORTFOLIO ARCHIVE
+            </h2>
+          </div>
+
+          <!-- Category Filter Buttons -->
+          <div id="filter-bar" class="flex flex-wrap gap-2.5" role="tablist" aria-label="Portfolio Categories">
+            <button onclick="filterPortfolio('ALL')" data-filter="ALL"
+              class="filter-btn arcade-btn bg-[#FFD700] text-black font-tech font-bold uppercase text-xs sm:text-sm px-4 py-2 rounded-lg cursor-pointer">
+              All Works (10)
+            </button>
+            <button onclick="filterPortfolio('3D RENDERS')" data-filter="3D RENDERS"
+              class="filter-btn arcade-btn bg-[#161B26] text-white hover:bg-[#0055FF] font-tech font-bold uppercase text-xs sm:text-sm px-4 py-2 rounded-lg cursor-pointer">
+              3D Renders (6)
+            </button>
+            <button onclick="filterPortfolio('GRAPHIC DESIGN')" data-filter="GRAPHIC DESIGN"
+              class="filter-btn arcade-btn bg-[#161B26] text-white hover:bg-[#FF2A2A] font-tech font-bold uppercase text-xs sm:text-sm px-4 py-2 rounded-lg cursor-pointer">
+              Graphic Design (4)
+            </button>
+            <button onclick="filterPortfolio('FILM & VIDEO')" data-filter="FILM & VIDEO"
+              class="filter-btn arcade-btn bg-[#161B26] text-white hover:bg-[#00C853] hover:text-black font-tech font-bold uppercase text-xs sm:text-sm px-4 py-2 rounded-lg cursor-pointer">
+              Film & Video (3)
+            </button>
+          </div>
+        </div>
+
+        <!-- Edge-to-Edge Showcase Grid -->
+        <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+          <!-- Cards dynamically injected via JavaScript -->
+        </div>
+
+        <!-- GitHub Repo Asset Helper Note -->
+        <div class="mt-8 bg-[#12151E] border-2 border-[#2A3142] rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs sm:text-sm text-gray-300">
+          <div class="flex items-start sm:items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-[#0055FF]/20 border border-[#0055FF] text-[#60A5FA] flex items-center justify-center shrink-0">
+              <i class="fa-brands fa-github text-base"></i>
+            </span>
+            <div>
+              <strong class="text-white">GitHub Pages Ready:</strong> Upload your 10 image files into an
+              <code class="bg-black/60 text-yellow-300 px-1.5 py-0.5 rounded font-mono">assets/</code> folder next to
+              <code class="bg-black/60 text-yellow-300 px-1.5 py-0.5 rounded font-mono">index.html</code> — each card automatically loads your exact file and displays custom preview art until uploaded!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 2: ABOUT / CREATOR LORE
+           ==================================================================== -->
+      <section id="about" class="relative z-10 py-10 px-4 sm:px-8 max-w-6xl mx-auto">
+        <div class="bg-[#12151E] border-4 border-black rounded-2xl p-6 sm:p-8 shadow-[8px_8px_0px_#0055FF]">
+          <h2 class="xg-section-title text-2xl sm:text-3xl uppercase text-center mb-6">
+            WELCOME TO THE ARCHIVE
+          </h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <!-- Left Bio Text -->
+            <div id="bio-container" class="lg:col-span-7 space-y-4 text-gray-200 text-base sm:text-lg leading-relaxed">
+              <!-- Populated from CREATOR_CONFIG -->
+            </div>
+
+            <!-- Right Framed Featured Emblem Box -->
+            <div class="lg:col-span-5">
+              <div class="bg-white p-2 rounded-xl border-4 border-black shadow-[6px_6px_0px_#FF2A2A]">
+                <div class="bg-[#090A0F] rounded-lg overflow-hidden relative aspect-video flex flex-col items-center justify-center p-4 text-center">
+                  <svg class="w-20 h-20 text-[#FFD700] mb-2 drop-shadow-[0_4px_0_#7A0000]" viewBox="0 0 64 64" fill="currentColor">
+                    <path d="M8 46L4 18l15 11L32 12l13 17 15-11-4 28H8zm4 6h40v6H12v-6z"/>
+                  </svg>
+                  <div class="mania-logo-text text-2xl sm:text-3xl uppercase">CREATOR</div>
+                  <p class="font-pixel text-[9px] text-gray-300 mt-2 tracking-widest">EST. 2026 // ARCHIVE</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 3: CREATOR DISCIPLINES / SKILL LOADOUT
+           ==================================================================== -->
+      <section id="capabilities" class="relative z-10 py-8 pb-16 px-4 sm:px-8 max-w-6xl mx-auto">
+        <h2 class="xg-section-title text-xl sm:text-3xl uppercase text-center mb-8">
+          CREATOR LOADOUT
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Card 1: 3D Renders -->
+          <div class="bg-[#12151E] border-3 border-black rounded-2xl p-5 shadow-[5px_5px_0px_#0055FF]">
+            <div class="w-12 h-12 rounded-xl bg-[#0055FF] border-2 border-black flex items-center justify-center text-white text-xl mb-4">
+              <i class="fa-solid fa-cube"></i>
+            </div>
+            <h3 class="font-arcade text-lg text-[#FFD700] mb-2">3D RENDERS</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Stylized character modeling, cel-shaded environments, dramatic noir lighting, and retro arcade tribute scenes.
+            </p>
+          </div>
+
+          <!-- Card 2: Graphic Design -->
+          <div class="bg-[#12151E] border-3 border-black rounded-2xl p-5 shadow-[5px_5px_0px_#FF2A2A]">
+            <div class="w-12 h-12 rounded-xl bg-[#FF2A2A] border-2 border-black flex items-center justify-center text-white text-xl mb-4">
+              <i class="fa-solid fa-pen-nib"></i>
+            </div>
+            <h3 class="font-arcade text-lg text-[#FF2A2A] mb-2">GRAPHIC DESIGN</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Eye-catching thumbnails, custom typography, promotional posters, vanity plate concepts, and bold brand graphics.
+            </p>
+          </div>
+
+          <!-- Card 3: Film & Video -->
+          <div class="bg-[#12151E] border-3 border-black rounded-2xl p-5 shadow-[5px_5px_0px_#00C853]">
+            <div class="w-12 h-12 rounded-xl bg-[#00C853] border-2 border-black flex items-center justify-center text-black text-xl mb-4">
+              <i class="fa-solid fa-film"></i>
+            </div>
+            <h3 class="font-arcade text-lg text-[#00C853] mb-2">FILM & VIDEO</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              High-retention video editing, motion title sequences, storyboard pacing, and visual storytelling for creators.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Right Zig-Zag Border -->
+    <aside class="hidden md:block w-8 lg:w-14 shrink-0 xg-zigzag-right border-l-2 border-red-900/60" aria-hidden="true"></aside>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="bg-[#0B0D14] border-t-4 border-black text-gray-400 py-6 px-4 text-center text-xs sm:text-sm">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>
+        © <span id="footer-year">2026</span> <strong class="text-white">CREATOR ARCHIVE STUDIO</strong>. Built for GitHub Pages.
+      </p>
+      <div class="flex items-center gap-4">
+        <a href="#showcase" class="hover:text-[#FFD700] transition-colors">Top ↑</a>
+        <button onclick="openContactModal()" class="text-[#00C853] hover:underline font-semibold cursor-pointer bg-transparent border-0">
+          Get In Touch
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       LIGHTBOX MODAL
+       ========================================================================== -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm p-3 sm:p-6" role="dialog" aria-modal="true">
+    <div class="bg-[#12151E] border-4 border-[#FFD700] rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden shadow-[0_0_40px_rgba(0,85,255,0.5)]">
+      <div class="flex items-center justify-between px-4 py-3 bg-[#1A1F2E] border-b-2 border-black">
+        <div class="flex items-center gap-2 min-w-0">
+          <span id="modal-category-badge" class="px-2.5 py-0.5 rounded bg-[#0055FF] text-white font-tech font-bold text-xs uppercase shrink-0">
+            3D RENDERS
+          </span>
+          <h3 id="modal-title" class="font-tech font-bold text-white text-base sm:text-xl truncate">
+            Artwork Title
+          </h3>
+        </div>
+        <button onclick="closeLightbox()" class="w-9 h-9 rounded-lg bg-[#FF2A2A] hover:bg-red-500 text-white border-2 border-black flex items-center justify-center cursor-pointer shrink-0" aria-label="Close modal">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12">
+        <div id="modal-image-stage" class="lg:col-span-8 bg-[#07080C] flex items-center justify-center p-3 sm:p-5 min-h-[260px] sm:min-h-[400px] border-b lg:border-b-0 lg:border-r border-gray-800">
+          <!-- Injected dynamically -->
+        </div>
+
+        <div class="lg:col-span-4 p-5 flex flex-col justify-between space-y-5">
+          <div>
+            <div class="text-xs font-pixel text-[#FFD700] mb-2">PROJECT NOTES</div>
+            <p id="modal-description" class="text-sm sm:text-base text-gray-200 leading-relaxed mb-4">
+              Description goes here.
+            </p>
+
+            <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Disciplines & Tags</div>
+            <div id="modal-tools" class="flex flex-wrap gap-1.5 mb-5"></div>
+
+            <div class="bg-[#0B0D14] border border-gray-800 rounded-lg p-3 text-xs text-gray-400">
+              <span class="block text-gray-300 font-semibold mb-1">Repository File Path:</span>
+              <code id="modal-filepath" class="text-yellow-300 break-all font-mono">assets/file.jpg</code>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-2 pt-3 border-t border-gray-800">
+            <button onclick="navigateLightbox(-1)" class="arcade-btn bg-[#232733] hover:bg-[#0055FF] text-white font-tech font-bold text-xs uppercase px-3.5 py-2 rounded-lg cursor-pointer">
+              ← Prev
+            </button>
+            <button onclick="navigateLightbox(1)" class="arcade-btn bg-[#232733] hover:bg-[#0055FF] text-white font-tech font-bold text-xs uppercase px-3.5 py-2 rounded-lg cursor-pointer">
+              Next →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       GET IN TOUCH / CONTACT MODAL
+       ========================================================================== -->
+  <div id="contact-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4" role="dialog" aria-modal="true">
+    <div class="bg-[#12151E] border-4 border-[#00C853] rounded-2xl max-w-lg w-full overflow-hidden shadow-[8px_8px_0px_#000000]">
+      <div class="bg-[#00C853] text-black px-5 py-3 border-b-4 border-black flex items-center justify-between">
+        <span class="font-arcade text-base sm:text-lg uppercase">GET IN TOUCH</span>
+        <button onclick="closeContactModal()" class="w-8 h-8 rounded bg-black text-white flex items-center justify-center cursor-pointer" aria-label="Close contact modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-4">
+        <p class="text-sm sm:text-base text-gray-200">
+          Want a custom <strong>3D render</strong>, <strong>thumbnail/poster design</strong>, or <strong>video edit</strong>? Reach out directly via Discord or Email!
+        </p>
+
+        <div class="bg-[#090A0F] border-2 border-gray-700 rounded-xl p-3.5 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <i class="fa-brands fa-discord text-2xl text-[#5865F2]"></i>
+            <div class="truncate">
+              <div class="text-xs text-gray-400 uppercase font-bold">Discord Handle</div>
+              <div id="contact-discord-text" class="font-mono text-sm sm:text-base text-white truncate">creator.archive</div>
+            </div>
+          </div>
+          <button onclick="copyText('contact-discord-text', 'Discord handle copied!')"
+            class="arcade-btn bg-[#5865F2] text-white font-tech font-bold text-xs uppercase px-3 py-1.5 rounded-lg cursor-pointer shrink-0">
+            Copy
+          </button>
+        </div>
+
+        <div class="bg-[#090A0F] border-2 border-gray-700 rounded-xl p-3.5 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <i class="fa-solid fa-envelope text-2xl text-[#FFD700]"></i>
+            <div class="truncate">
+              <div class="text-xs text-gray-400 uppercase font-bold">Business / Collab Email</div>
+              <div id="contact-email-text" class="font-mono text-sm sm:text-base text-white truncate">contact@creatorarchive.example</div>
+            </div>
+          </div>
+          <button onclick="copyText('contact-email-text', 'Email address copied!')"
+            class="arcade-btn bg-[#FFD700] text-black font-tech font-bold text-xs uppercase px-3 py-1.5 rounded-lg cursor-pointer shrink-0">
+            Copy
+          </button>
+        </div>
+
+        <div id="copy-toast" class="hidden text-center text-xs font-bold uppercase tracking-wider py-2 px-3 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+          Copied to clipboard!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       APPLICATION LOGIC & DATA ENGINE
+       ========================================================================== -->
+  <script>
+    let currentFilter = "ALL";
+    let currentLightboxIndex = 0;
+
+    const portfolioItems = [
+      {
+        id: 1,
+        title: "Film & Photography Vertical",
+        category: "GRAPHIC DESIGN",
+        filename: "Final 1 F&P Video Editing - Copy.jpg",
+        svgTheme: "fp-vertical",
+        tools: ["Poster Design", "Typography", "Composition"],
+        description: "A vertical graphic composition featuring stylized framing, photo-film elements, and high-contrast typography."
+      },
+      {
+        id: 2,
+        title: "Film & Photography Wide Mockup",
+        category: "GRAPHIC DESIGN",
+        filename: "VideoEditHire Mock-Up - Copy (2).jpg",
+        svgTheme: "fp-wide",
+        tools: ["Branding", "Layout", "Video Editing"],
+        description: "Wide-format creative banner highlighting professional video editing services and multimedia assets."
+      },
+      {
+        id: 3,
+        title: "Revant True",
+        category: "3D RENDERS",
+        filename: "REVANT TRUE - Copy.jpg",
+        svgTheme: "revant-throne",
+        tools: ["3D Modeling", "Lighting", "Atmosphere"],
+        description: "A dramatic 3D interior render featuring architectural pillars, crimson tones, and a crowned centerpiece."
+      },
+      {
+        id: 4,
+        title: "You Gotta Move",
+        category: "3D RENDERS",
+        filename: "YOU GOTTA MOOOOOOVE.jpg",
+        svgTheme: "mooooove",
+        tools: ["Character Rigging", "Expressive Eyes", "Stylized 3D"],
+        description: "A playful character study focusing on expressive low-poly geometry and vibrant green framing."
+      },
+      {
+        id: 5,
+        title: "Vanity License Plate",
+        category: "GRAPHIC DESIGN",
+        filename: "VANITY LICNESE PLATE Compressed.jpg",
+        svgTheme: "botbic",
+        tools: ["Vector Art", "Cosmic Background", "Typography"],
+        description: "Custom vanity plate artwork set against a colorful cosmic nebula background with retro arcade framing."
+      },
+      {
+        id: 6,
+        title: "Delicious Information",
+        category: "FILM & VIDEO",
+        filename: "Vert Test.jpg",
+        svgTheme: "delicious-info",
+        tools: ["Film Strips", "Vertical Pacing", "Visual Effects"],
+        description: "Cinematic vertical test composition showcasing floating film strips and dynamic lighting."
+      },
+      {
+        id: 7,
+        title: "Noir Flowers",
+        category: "3D RENDERS",
+        filename: "NoirFlowersReTake.jpg",
+        svgTheme: "noir-flowers",
+        tools: ["Cel-Shading", "Studio Lighting", "Still Life"],
+        description: "A stylized noir-inspired floral still life render with high contrast lighting and polished desk props."
+      },
+      {
+        id: 8,
+        title: "Pakku",
+        category: "3D RENDERS",
+        filename: "Pakku.jpg",
+        svgTheme: "pakku",
+        tools: ["Character Design", "Arcade Tribute", "Lighting"],
+        description: "A retro-inspired 3D character render bringing classic arcade iconography into a modern cel-shaded environment."
+      },
+      {
+        id: 9,
+        title: "Retro Matrix Interface",
+        category: "GRAPHIC DESIGN",
+        filename: "This might actually be the most MID render I will EVER make.jpg",
+        svgTheme: "retro-matrix",
+        tools: ["Hexadecimal Grid", "Retro UI", "Lighting"],
+        description: "An experimental render exploring digital code grids, neon green accents, and retro terminal aesthetics."
+      },
+      {
+        id: 10,
+        title: "Pactuff is Back",
+        category: "3D RENDERS",
+        filename: "PACTUFF IS BACK.jpg",
+        svgTheme: "pactuff",
+        tools: ["Neon Lighting", "Environment", "Character Pose"],
+        description: "An atmospheric character render set within a neon-lit arcade maze environment."
+      }
+    ];
+
+    function getCustomFallbackSVG(theme, title) {
+      const svgs = {
+        "fp-vertical": `<svg viewBox="0 0 400 500" class="w-full h-full object-cover"><rect width="400" height="500" fill="#1E293B"/><text x="200" y="250" text-anchor="middle" fill="#86EFAC" font-family="sans-serif" font-weight="bold" font-size="20">Film &amp; Photography</text></svg>`,
+        "fp-wide": `<svg viewBox="0 0 640 360" class="w-full h-full object-cover"><rect width="640" height="360" fill="#334155"/><text x="320" y="180" text-anchor="middle" fill="#E2E8F0" font-family="sans-serif" font-weight="bold" font-size="22">Film &amp; Photography Wide</text></svg>`,
+        "revant-throne": `<svg viewBox="0 0 640 360" class="w-full h-full object-cover"><rect width="640" height="360" fill="#7F3F3F"/><text x="320" y="180" text-anchor="middle" fill="#FCA5A5" font-family="sans-serif" font-weight="bold" font-size="22">Revant True</text></svg>`,
+        "mooooove": `<svg viewBox="0 0 640 360" class="w-full h-full object-cover"><rect width="640" height="360" fill="#111827"/><text x="320" y="180" text-anchor="middle" fill="#4C9A2A" font-family="sans-serif" font-weight="bold" font-size="22">You Gotta Move</text></svg>`,
+        "botbic": `<svg viewBox="0 0 640 360" class="w-full h-full object-cover"><rect width="640" height="360" fill="#312E81"/><text x="320" y="180" text-anchor="middle" fill="#FDE047" font-family="sans-serif" font-weight="bold" font-size="22">Vanity Plate</text></svg>`,
+        "delicious-info": `<svg viewBox="0 0 640 360" class="w-full h-full object-cover"><rect width="640" height="360" fill="#92400E"/><text x="320" y="180" text-anchor="middle" fill="#60A5FA" font-family="sans-serif" font-weight="bold" font-size="22">Delicious Information</text></svg>`,
+        "noir-flowers": `<svg viewBox="0 0 640 360" class="w-full h-full object-cover"><rect width="640" height="360" fill="#1F2937"/><text x="320" y="180" text-anchor="middle" fill="#DC2626" font-family="sans-serif" font-weight="bold" font-size="22">Noir Flowers</text></svg>`,
+        "pakku": `<svg viewBox="0 0 640 360" class="w-full h-full object-cover"><rect width="640" height="360" fill="#4B5563"/><text x="320" y="180" text-anchor="middle" fill="#EAB308" font-family="sans-serif" font-weight="bold" font-size="22">Pakku</text></svg>`,
+        "retro-matrix": `<svg viewBox="0 0 640 480" class="w-full h-full object-cover"><rect width="640" height="480" fill="#1A2E05"/><text x="320" y="240" text-anchor="middle" fill="#4ADE80" font-family="sans-serif" font-weight="bold" font-size="22">Retro Matrix</text></svg>`,
+        "pactuff": `<svg viewBox="0 0 640 480" class="w-full h-full object-cover"><rect width="640" height="480" fill="#0B1120"/><text x="320" y="240" text-anchor="middle" fill="#EF4444" font-family="sans-serif" font-weight="bold" font-size="22">Pactuff is Back</text></svg>`
+      };
+      return svgs[theme] || `<svg viewBox="0 0 640 360" class="w-full h-full object-cover"><rect width="640" height="360" fill="#111827"/><text x="320" y="185" text-anchor="middle" fill="#FFD700" font-family="sans-serif" font-size="20">${title}</text></svg>`;
+    }
+
+    function initCreatorProfile() {
+      document.getElementById("header-brand-title").textContent = CREATOR_CONFIG.bannerHeadline;
+      document.getElementById("header-tagline").textContent = CREATOR_CONFIG.tagline;
+      document.getElementById("commission-badge").textContent = CREATOR_CONFIG.commissionStatus;
+      document.getElementById("hero-main-handle").textContent = CREATOR_CONFIG.brandTitle;
+      document.getElementById("hero-sub-badge").textContent = CREATOR_CONFIG.studioSubtitle;
+
+      document.getElementById("social-youtube").href = CREATOR_CONFIG.socials.youtube;
+      document.getElementById("social-roblox").href = CREATOR_CONFIG.socials.roblox;
+      document.getElementById("contact-discord-text").textContent = CREATOR_CONFIG.socials.discordTag;
+      document.getElementById("contact-email-text").textContent = CREATOR_CONFIG.socials.email;
+
+      const bioContainer = document.getElementById("bio-container");
+      bioContainer.innerHTML = CREATOR_CONFIG.bioParagraphs.map(p => `<p>${p}</p>`).join("");
+      document.getElementById("footer-year").textContent = new Date().getFullYear();
+    }
+
+    function renderPortfolio(filter = "ALL") {
+      const grid = document.getElementById("portfolio-grid");
+      grid.innerHTML = "";
+
+      const filtered = filter === "ALL"
+        ? portfolioItems
+        : portfolioItems.filter(item => item.category === filter);
+
+      filtered.forEach((item, index) => {
+        const card = document.createElement("article");
+        card.className = "gallery-card rounded-xl cursor-pointer group flex flex-col";
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", item.title);
+        card.onclick = () => openLightbox(portfolioItems.indexOf(item));
+
+        const badgeColor = item.category === "3D RENDERS"
+          ? "bg-[#0055FF] text-white"
+          : item.category === "GRAPHIC DESIGN"
+          ? "bg-[#FF2A2A] text-white"
+          : "bg-[#00C853] text-black font-semibold";
+
+        card.innerHTML = `
+          <div class="relative aspect-video w-full overflow-hidden bg-black/80">
+            <img src="assets/${item.filename}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="absolute inset-0 w-full h-full hidden pointer-events-none">
+              ${getCustomFallbackSVG(item.svgTheme, item.title)}
+            </div>
+            <div class="gallery-card-overlay absolute inset-0 flex items-end p-3 transition-opacity">
+              <span class="text-xs font-tech font-bold text-yellow-300 bg-black/80 px-2 py-1 rounded">Click to Inspect →</span>
+            </div>
+          </div>
+          <div class="p-3.5 flex flex-col justify-between flex-1 bg-[#12151E]">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[10px] font-pixel px-2 py-0.5 rounded ${badgeColor}">${item.category}</span>
+                <span class="text-[11px] font-mono text-gray-400">#${String(item.id).padStart(2, '0')}</span>
+              </div>
+              <h3 class="font-tech font-bold text-white text-sm sm:text-base group-hover:text-yellow-400 transition-colors truncate">
+                ${item.title}
+              </h3>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-gray-800 flex items-center justify-between text-xs text-gray-400">
+              <span class="truncate">${item.tools[0] || 'Artwork'}</span>
+              <span class="text-yellow-400 font-bold group-hover:translate-x-1 transition-transform">View →</span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterPortfolio(category) {
+      currentFilter = category;
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        if (btn.getAttribute("data-filter") === category) {
+          btn.className = "filter-btn arcade-btn bg-[#FFD700] text-black font-tech font-bold uppercase text-xs sm:text-sm px-4 py-2 rounded-lg cursor-pointer";
+        } else {
+          btn.className = "filter-btn arcade-btn bg-[#161B26] text-white hover:bg-[#0055FF] font-tech font-bold uppercase text-xs sm:text-sm px-4 py-2 rounded-lg cursor-pointer";
+        }
+      });
+      renderPortfolio(category);
+    }
+
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      const item = portfolioItems[index];
+      if (!item) return;
+
+      document.getElementById("modal-title").textContent = item.title;
+      document.getElementById("modal-category-badge").textContent = item.category;
+      document.getElementById("modal-description").textContent = item.description;
+      document.getElementById("modal-filepath").textContent = `assets/${item.filename}`;
+
+      const toolsContainer = document.getElementById("modal-tools");
+      toolsContainer.innerHTML = item.tools.map(t => `<span class="bg-[#1A1F2E] text-yellow-300 border border-gray-700 text-xs font-semibold px-2.5 py-1 rounded">${t}</span>`).join("");
+
+      const stage = document.getElementById("modal-image-stage");
+      stage.innerHTML = `
+        <div class="relative max-w-full max-h-[70vh] overflow-hidden rounded-lg flex items-center justify-center">
+          <img src="assets/${item.filename}" alt="${item.title}" class="max-h-[65vh] object-contain rounded" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="w-full h-full min-h-[300px] hidden items-center justify-center">
+            ${getCustomFallbackSVG(item.svgTheme, item.title)}
+          </div>
+        </div>
+      `;
+
+      const modal = document.getElementById("lightbox-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById("lightbox-modal");
+      modal.classList.remove("flex");
+      modal.classList.add("hidden");
+      document.body.style.overflow = "auto";
+    }
+
+    function navigateLightbox(direction) {
+      currentLightboxIndex = (currentLightboxIndex + direction + portfolioItems.length) % portfolioItems.length;
+      openLightbox(currentLightboxIndex);
+    }
+
+    function openContactModal() {
+      const modal = document.getElementById("contact-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeContactModal() {
+      const modal = document.getElementById("contact-modal");
+      modal.classList.remove("flex");
+      modal.classList.add("hidden");
+      document.body.style.overflow = "auto";
+    }
+
+    function copyText(elementId, successMessage) {
+      const text = document.getElementById(elementId).textContent;
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMessage);
+      } catch (err) {
+        console.error('Failed to copy text', err);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function copyDiscord() {
+      copyText('contact-discord-text', 'Discord handle copied!');
+      openContactModal();
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("copy-toast");
+      toast.textContent = message;
+      toast.classList.remove("hidden");
+      setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 2500);
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeLightbox();
+        closeContactModal();
+      }
+    });
+
+    window.onload = function() {
+      initCreatorProfile();
+      renderPortfolio("ALL");
+    };
+  </script>
+</body>
+</html>
